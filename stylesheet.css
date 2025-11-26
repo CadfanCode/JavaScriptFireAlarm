@@ -1,3 +1,42 @@
+/* INDICATOR STYLING */
+.status-indicator {
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  background-color: #cccccc;
+  border-radius: 50%;
+  margin-right: 10px;
+  transition: all 0.3s ease;
+}
+
+/* Style for when the alarm is ACTIVE */
+.status-indicator.is-active {
+  background-color: #ff4444;
+  box-shadow: 0 0 10px #ff4444;
+}
+
+/* Pulsing effect */
+@keyframes pulse-red {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 68, 68, 0.7);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(255, 68, 68, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(255, 68, 68, 0);
+  }
+}
+
+/* Update the active class to use the animation */
+.status-light.is-active {
+  background-color: #ff4444;
+  animation: pulse-red 2s infinite; /* Runs the animation forever */
+}
+
 
 /* BUTTON STYLING */
 .standard-btn {
@@ -10,4 +49,19 @@
     background-color: #004c8c;
     box-shadow: 0 6px 8px 0 rgba(0,0,0,0.5);
     transform: translateY(-1px);
+}
+
+/* KEYPAD STYLING */
+.keypad-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  background-color: dodgerblue;
+  padding: 10px;
+}
+.keypad-container div {
+  background-color: #f1f1f1;
+  border: 1px solid black;
+  padding: 10px;
+  font-size: 30px;
+  text-align: center;
 }
