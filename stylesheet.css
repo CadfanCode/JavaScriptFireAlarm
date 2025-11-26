@@ -1,0 +1,13 @@
+
+/* BUTTON STYLING */
+.standard-btn {
+    background-color: #003366;
+    color: #ffffff;
+}
+
+.standard-btn:hover,
+.standard-btn:focus {
+    background-color: #004c8c;
+    box-shadow: 0 6px 8px 0 rgba(0,0,0,0.5);
+    transform: translateY(-1px);
+}
