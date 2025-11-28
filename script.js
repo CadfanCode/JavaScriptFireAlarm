@@ -24,20 +24,41 @@ function setAlarmState(lightElement, isActive) {
 
 /* --- BUTTON TRIGGERS --- */
 document.getElementById('fire-alarm-btn').addEventListener('click', () => {
-if (fireIndicator == true){
-setAlarmState(fireIndicator, false)}
-else {
-    setAlarmState(fireIndicator, true);
-}});
+    const isActive = fireIndicator.classList.contains('is-active');
+    setAlarmState(fireIndicator, !isActive);
+});
 
 document.getElementById('intruder-alarm-btn').addEventListener('click', () => {
-if (intruderIndicator == true){
-setAlarmState(intruderIndicator, false)}
-else {
-    setAlarmState(intruderIndicator, true);
-}});
+    const isActive = intruderIndicator.classList.contains('is-active');
+    setAlarmState(intruderIndicator, !isActive)
+});
 
 document.getElementById('dual-alarm-btn').addEventListener('click', () => {
     setAlarmState(fireIndicator, true);
     setAlarmState(intruderIndicator, true);
 });
+
+/* --- ENTER BUTTON LOGIC & WARNING MESSAGE --- */
+const submitBtn = document.getElementById('submit-btn');
+const correctPin = '1234';
+
+submitBtn.addEventListener('click', () => {
+    const currentInput = keypadDisplay.value;
+
+    if (currentInput === correctPin) {
+        setAlarmState(fireIndicator, false);
+        setAlarmState(intruderIndicator, false);
+        // Give visual feedback on the screen
+        keypadDisplay.value = "PASS";
+        setTimeout(() => {
+            keypadDisplay.value = "";
+        }, 2000);
+
+    } else {
+        alert("Incorrect pin!"); // WARNING MESSAGE
+        setTimeout(() => {
+            keypadDisplay.value = "";
+        }, 1000);
+    }
+});
+
