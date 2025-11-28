@@ -1,29 +1,37 @@
-const light_1 = document.getElementById('fire-alarm-indicator');
+/* --- KEYPAD LOGIC --- */
+const keypadDisplay = document.getElementById('keypad-screen');
+const keypadButtons = document.querySelectorAll('.keypad-btn');
 
-// Function to turn alarm ON
-function activateAlarm() {
-  light.classList.add('is-active');
-  // Optional: Update text or accessible label
-  light.setAttribute('aria-label', 'Alarm is Active');
+keypadButtons.forEach(button => {
+    button.addEventListener('click', (e) => {
+        const value = e.target.innerText;
+        keypadDisplay.value += value;
+    });
+});
+
+/* --- INDICATOR LOGIC --- */
+const fireLight = document.getElementById('fire-alarm-indicator');
+const intruderLight = document.getElementById('intruder-alarm-indicator');
+function setAlarmState(lightElement, isActive) {
+    if (isActive) {
+        lightElement.classList.add('is-active');
+        lightElement.setAttribute('aria-label', 'Alarm is Active');
+    } else {
+        lightElement.classList.remove('is-active');
+        lightElement.setAttribute('aria-label', 'Alarm is Inactive');
+    }
 }
 
-// Function to turn alarm OFF
-function deactivateAlarm() {
-  light.classList.remove('is-active');
-  light.setAttribute('aria-label', 'Alarm is Inactive');
-}
+/* --- BUTTON TRIGGERS --- */
+document.getElementById('fire-alarm-btn').addEventListener('click', () => {
+    setAlarmState(fireLight, true);
+});
 
-const light_2 = document.getElementById('intruder-alarm-indicator');
+document.getElementById('intruder-alarm-btn').addEventListener('click', () => {
+    setAlarmState(intruderLight, true);
+});
 
-// Function to turn alarm ON
-function activateAlarm() {
-  light.classList.add('is-active');
-  // Optional: Update text or accessible label
-  light.setAttribute('aria-label', 'Alarm is Active');
-}
-
-// Function to turn alarm OFF
-function deactivateAlarm() {
-  light.classList.remove('is-active');
-  light.setAttribute('aria-label', 'Alarm is Inactive');
-}
+document.getElementById('dual-alarm-btn').addEventListener('click', () => {
+    setAlarmState(fireLight, true);
+    setAlarmState(intruderLight, true);
+});
