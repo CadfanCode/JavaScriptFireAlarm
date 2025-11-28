@@ -3,12 +3,13 @@ const keypadDisplay = document.getElementById('keypad-screen');
 const keypadButtons = document.querySelectorAll('.keypad-btn');
 
 keypadButtons.forEach(button => {
-while (keypadDisplay.value.length <= 4){ // Limits number of values on display to 4
     button.addEventListener('click', (e) => {
         const value = e.target.innerText;
-        keypadDisplay.value += value;
+        if (keypadDisplay.value.length < 4) {   // limits display to max 4 digits
+            keypadDisplay.value += value;
+        }
     });
-}});
+});
 
 /* --- AUTHORIZATION LOGIC & WARNING MESSAGE --- */
 const submitBtn = document.getElementById('submit-btn');
