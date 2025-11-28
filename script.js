@@ -10,11 +10,38 @@ while (keypadDisplay.value.length <= 4){ // Limits number of values on display t
     });
 }});
 
+/* --- AUTHORIZATION LOGIC & WARNING MESSAGE --- */
+const submitBtn = document.getElementById('submit-btn');
+const correctPin = '1234';
+let authUser = false;
+
+submitBtn.addEventListener('click', () => {
+    const currentInput = keypadDisplay.value;
+
+    if (currentInput === correctPin) {
+        setAlarmState(fireIndicator, false);
+        setAlarmState(intruderIndicator, false);
+        authUser = true;
+
+        keypadDisplay.value = "PASS";
+        setTimeout(() => {
+            keypadDisplay.value = "";
+        }, 2000);
+
+    } else {
+    authUser = false;
+        alert("INCORRECT PASSWORD!"); // WARNING MESSAGE
+        setTimeout(() => {
+            keypadDisplay.value = "";
+        }, 1000);
+    }
+});
+
 /* --- INDICATOR LOGIC --- */
 const fireIndicator = document.getElementById('fire-alarm-indicator');
 const intruderIndicator = document.getElementById('intruder-alarm-indicator');
-function setAlarmState(lightElement, isActive) {
-    if (isActive) {
+function setAlarmState(lightElement, isActive, authUser) {
+    if (isActive && authUser) {
         lightElement.classList.add('is-active');
         lightElement.setAttribute('aria-label', 'Alarm is Active');
     } else {
@@ -26,7 +53,7 @@ function setAlarmState(lightElement, isActive) {
 /* --- BUTTON TRIGGERS --- */
 document.getElementById('fire-alarm-btn').addEventListener('click', () => {
     const isActive = fireIndicator.classList.contains('is-active');
-    setAlarmState(fireIndicator, !isActive);
+    setAlarmState(fireIndicator, !isActive); // the !isActive will toggle the state with each click.
 });
 
 document.getElementById('intruder-alarm-btn').addEventListener('click', () => {
@@ -39,27 +66,9 @@ document.getElementById('dual-alarm-btn').addEventListener('click', () => {
     setAlarmState(intruderIndicator, true);
 });
 
-/* --- ENTER BUTTON LOGIC & WARNING MESSAGE --- */
-const submitBtn = document.getElementById('submit-btn');
-const correctPin = '1234';
-
-submitBtn.addEventListener('click', () => {
-    const currentInput = keypadDisplay.value;
-
-    if (currentInput === correctPin) {
-        setAlarmState(fireIndicator, false);
-        setAlarmState(intruderIndicator, false);
-        // Give visual feedback on the screen
-        keypadDisplay.value = "PASS";
-        setTimeout(() => {
-            keypadDisplay.value = "";
-        }, 2000);
-
-    } else {
-        alert("Incorrect pin!"); // WARNING MESSAGE
-        setTimeout(() => {
-            keypadDisplay.value = "";
-        }, 1000);
-    }
-});
+/* --- CLEAR BUTTON LOGIC --- */
+const clearBtn = document.getElementById('clear-btn');
+clearBtn.addEventListener('click', () => {
+    keypadDisplay.value = "";
+})
 
