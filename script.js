@@ -100,8 +100,8 @@ submitBtn.addEventListener('click', () => {
         logEvent(fireWasActive, intruderWasActive, false);
         keypadDisplay.value = "INCORRECT";
 
-        alert("INCORRECT PASSWORD! Access Denied.");
         deniedSound.play();
+        alert("INCORRECT PASSWORD! Access Denied.");
 
         setTimeout(() => {
             keypadDisplay.value = "";
@@ -118,8 +118,8 @@ function handleAuthAction(callback) {
         callback();
         authUser = false;
     } else {
-        alert(authError);
         alertSound.play();
+        alert(authError);
     }
 }
 
