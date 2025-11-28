@@ -1,7 +1,8 @@
 /* --- SOUNDS --- */
 /* A few fun sounds added to enhance the user experience */
-const activationSound = new Audio('sounds/access_granted_beep.mp3');
-const deniedSound = new Audio('sounds/access_denied.mp3');
+const activationSound = new Audio('sounds/access_granted.mp3');
+const activationBeep = new Audio('sounds/access_granted_beep.mp3');
+const deactivationSound = new Audio('sounds/deactivation.mp3');
 const alertSound = new Audio('sounds/alert.mp3');
 const keypadSound = new Audio('sounds/keypad_click.mp3');
 
@@ -100,7 +101,7 @@ submitBtn.addEventListener('click', () => {
         logEvent(fireWasActive, intruderWasActive, false);
         keypadDisplay.value = "INCORRECT";
 
-        deniedSound.play();
+        alertSound.play();
         alert("INCORRECT PASSWORD! Access Denied.");
 
         setTimeout(() => {
@@ -125,18 +126,21 @@ function handleAuthAction(callback) {
 
 document.getElementById('fire-alarm-btn').addEventListener('click', () => {
     handleAuthAction(() => {
+        activationBeep.play();
         setAlarmState(fireIndicator, true);
     });
 });
 
 document.getElementById('intruder-alarm-btn').addEventListener('click', () => {
     handleAuthAction(() => {
+        activationBeep.play();
         setAlarmState(intruderIndicator, true);
     });
 });
 
 document.getElementById('dual-alarm-btn').addEventListener('click', () => {
     handleAuthAction(() => {
+        activationBeep.play();
         setAlarmState(fireIndicator, true);
         setAlarmState(intruderIndicator, true);
     });
@@ -144,6 +148,7 @@ document.getElementById('dual-alarm-btn').addEventListener('click', () => {
 
 deactivationBtn.addEventListener('click', () => {
     handleAuthAction(() => {
+        deactivationSound.play();
         setAlarmState(fireIndicator, false);
         setAlarmState(intruderIndicator, false);
     });
