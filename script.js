@@ -3,11 +3,12 @@ const keypadDisplay = document.getElementById('keypad-screen');
 const keypadButtons = document.querySelectorAll('.keypad-btn');
 
 keypadButtons.forEach(button => {
+while (keypadDisplay.value.length <= 4){ // Limits number of values on display to 4
     button.addEventListener('click', (e) => {
         const value = e.target.innerText;
         keypadDisplay.value += value;
     });
-});
+}});
 
 /* --- INDICATOR LOGIC --- */
 const fireIndicator = document.getElementById('fire-alarm-indicator');
