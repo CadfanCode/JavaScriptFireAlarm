@@ -10,8 +10,8 @@ keypadButtons.forEach(button => {
 });
 
 /* --- INDICATOR LOGIC --- */
-const fireLight = document.getElementById('fire-alarm-indicator');
-const intruderLight = document.getElementById('intruder-alarm-indicator');
+const fireIndicator = document.getElementById('fire-alarm-indicator');
+const intruderIndicator = document.getElementById('intruder-alarm-indicator');
 function setAlarmState(lightElement, isActive) {
     if (isActive) {
         lightElement.classList.add('is-active');
@@ -24,14 +24,20 @@ function setAlarmState(lightElement, isActive) {
 
 /* --- BUTTON TRIGGERS --- */
 document.getElementById('fire-alarm-btn').addEventListener('click', () => {
-    setAlarmState(fireLight, true);
-});
+if (fireIndicator == true){
+setAlarmState(fireIndicator, false)}
+else {
+    setAlarmState(fireIndicator, true);
+}});
 
 document.getElementById('intruder-alarm-btn').addEventListener('click', () => {
-    setAlarmState(intruderLight, true);
-});
+if (intruderIndicator == true){
+setAlarmState(intruderIndicator, false)}
+else {
+    setAlarmState(intruderIndicator, true);
+}});
 
 document.getElementById('dual-alarm-btn').addEventListener('click', () => {
-    setAlarmState(fireLight, true);
-    setAlarmState(intruderLight, true);
+    setAlarmState(fireIndicator, true);
+    setAlarmState(intruderIndicator, true);
 });
